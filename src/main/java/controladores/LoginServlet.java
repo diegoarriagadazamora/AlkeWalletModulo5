@@ -2,6 +2,8 @@
 package controladores;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +25,13 @@ public class LoginServlet extends HttpServlet {
 		String usuario = request.getParameter("usuario");
 		String password = request.getParameter("password");
 		if (usuario != null && !usuario.isEmpty() && password != null && !password.isEmpty()) {
-			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			UsuarioDAO usuarioDAO = null;
+			try {
+				usuarioDAO = new UsuarioDAO();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			try {
 				Usuario usu = usuarioDAO.findUser(usuario, password);

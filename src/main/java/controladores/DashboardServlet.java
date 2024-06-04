@@ -35,7 +35,9 @@ public class DashboardServlet extends HttpServlet {
 			}
 
 		} else {
-			response.sendRedirect("dispatcher?action=login");
+			response.sendRedirect(request.getContextPath() + "/dispatcher?action=login");
+
+
 		}
 	}
 }

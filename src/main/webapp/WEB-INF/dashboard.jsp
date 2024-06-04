@@ -19,7 +19,7 @@
 			<%= ((Usuario) session.getAttribute("usuario")).getUsuario()%>!
 		</p>
 
-<%-- Mensajes de éxito --%>
+		<%-- Mensajes de éxito --%>
 		<c:if test="${not empty param.exito}">
 			<div class="alert alert-success mt-3">
 				<%-- Mostrar mensaje de éxito solo si la operación fue exitosa --%>
@@ -83,7 +83,7 @@
 
 
 
-		
+
 
 		<%-- *****Se deja para configurar a futuro*****
             

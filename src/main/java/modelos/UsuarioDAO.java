@@ -8,37 +8,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UsuarioDAO {
-	private final String jdbcURL = "jdbc:mysql://localhost:3306/AlkeWalletJSP?serverTimezone=UTC";
-	private final String jdbcUsername = "root";
-	private final String jdbcPassword = "5W@rdf15";
-	private Connection jdbcConnection;
+    private final String jdbcURL = "jdbc:mysql://localhost:3306/AlkeWalletJSP?serverTimezone=UTC";
+    private final String jdbcUsername = "root";
+    private final String jdbcPassword = "5W@rdf15";
+    private Connection jdbcConnection;
 
-	public UsuarioDAO() {
-	}
+    public UsuarioDAO() throws SQLException {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            this.jdbcConnection = DriverManager.getConnection(
+                jdbcURL, jdbcUsername, jdbcPassword);
+            System.out.println("Conexión a la base de datos establecida correctamente.");
+        } catch (SQLException | ClassNotFoundException var2) {
+            var2.printStackTrace();
+            throw new SQLException("Error al conectar a la base de datos: " + var2.getMessage());
+        }
+    }
 
-	protected Connection connect() throws SQLException {
-		try {
-			if (this.jdbcConnection == null || this.jdbcConnection.isClosed()) {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				this.jdbcConnection = DriverManager.getConnection(
-						"jdbc:mysql://localhost:3306/AlkeWalletJSP?serverTimezone=UTC", "PONER-TU-USUARIO",
-						"poner-tu-pass");
-				System.out.println("Conexi\u00f3n a la base de datos establecida correctamente.");
-			}
-		} catch (SQLException | ClassNotFoundException var2) {
-			var2.printStackTrace();
-			throw new SQLException("Error al conectar a la base de datos: " + var2.getMessage());
-		}
+    protected Connection connect() throws SQLException {
+        if (this.jdbcConnection == null || this.jdbcConnection.isClosed()) {
+            throw new SQLException("La conexión está cerrada o es nula.");
+        }
+        return this.jdbcConnection;
+    }
 
-		return this.jdbcConnection;
-	}
-
-	protected void disconnect() throws SQLException {
-		if (this.jdbcConnection != null && !this.jdbcConnection.isClosed()) {
-			this.jdbcConnection.close();
-		}
-
-	}
+    protected void disconnect() throws SQLException {
+        if (this.jdbcConnection != null && !this.jdbcConnection.isClosed()) {
+            this.jdbcConnection.close();
+        }
+    }
 
 	public Usuario findUser(String usuario, String password) throws SQLException {
 		String sql = "SELECT * FROM usuarios WHERE usuario=? AND password=SHA2(?, 256)";
