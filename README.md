@@ -14,7 +14,7 @@
 ![alt text](https://github.com/diegoarriagadazamora/AlkeWalletModulo5/blob/main/imgs-readme/conBDUDAO.png)
 
 <H2>Inicando el servidor tomcat 9.0</H2>
-<p>- cuando esté corriendo el servidor debes ir a la ruta http://localhost:8080/AlkeWalletJSP/dispatcher?action=login</p>
+<p>- cuando esté corriendo el servidor debes ir a la ruta http://localhost:8080/AlkeWalletModulo5/dispatcher?action=login</p>
 <p>- El disptcher fué configurado de esa forma con esa url por temas de no encontrar solución de otra forma de llegar al login tipo bucle</p>
 <p>- El usuario son una de 2, que creamos en la BD puede ser usuario; diego o usuario; felipe ambos tiene configurada la password como "123", super dificil jajaja</p>
 
